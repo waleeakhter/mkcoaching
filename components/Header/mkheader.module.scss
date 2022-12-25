@@ -1,0 +1,26 @@
+.mainWrapper {
+    transition: all 0.25s ease-in-out;
+    .Sidebar {
+        flex: 0 0 230px;
+        height: 100vh;
+        background: linear-gradient(90deg, #e406507e, #ab315f);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        padding: 1rem;
+        margin-left: -230px;
+    }
+    header {
+        background: linear-gradient(275deg, #e40650, #ab315f);
+    }
+    .navLogo {
+        transition: all 0.2s ease-in-out;
+    }
+    &.active {
+        .Sidebar {
+            margin-left: 0;
+        }
+        .navLogo {
+            pointer-events: none;
+            opacity: 0;
+        }
+    }
+}

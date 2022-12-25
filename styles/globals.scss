@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html {
+  background: linear-gradient(45deg, #ab315f, #8e133d);
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button[type="submit"],
+button[type="button"] {
+  background-color: var(--primary-color);
+}
