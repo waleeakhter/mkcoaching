@@ -10,8 +10,8 @@ import * as yup from "yup";
 import API from "./../../utils/axios"
 import { Toast, ToastSeverityType } from 'primereact/toast';
 import { UserType } from '../../utils/Models/User';
-type Props = {}
-const AddUser = (props: Props) => {
+type Props = { user: UserType, id: any }
+const AddUser = ({ user, id }: Props) => {
     const toast = useRef<Toast>(null)
     const initialValues: UserType = {
         firstName: "",
@@ -25,7 +25,7 @@ const AddUser = (props: Props) => {
         firstName: yup.string().required("Field is required!"),
         lastName: yup.string().required("Field is required!"),
         email: yup.string().email("Email is not valid").required("Email field is required"),
-        password: yup.string().required("Password field is required"),
+        password: !id ? yup.string().required("Password field is required") : yup.string(),
         paymentStatus: yup.string().required("Field is required!"),
         paymentDate: yup.string().required("Field is required!")
     })
@@ -36,17 +36,16 @@ const AddUser = (props: Props) => {
 
     }
     const onSubmit = ({ values, actions }: { values: UserType, actions: FormikHelpers<UserType> }) => {
-        console.log(values, actions)
-        API.post('/users/add', values).then(res => {
+        API({ url: "/users/add", method: id ? 'PATCH' : 'POST', data: values }).then(res => {
             console.log(res.data);
             toastMessage('success', res.data?.user.firstName, res.data?.message)
             actions.setSubmitting(false)
 
         }).catch(err => {
-            console.log(err)
+            console.log("erorrs", err)
             actions.setSubmitting(false)
             toastMessage('error', "Error", "Somthing Went Wrong")
-            toastMessage('error', err.response.data?.user.email, err.response.data?.message)
+            toastMessage('error', err.response?.data?.user.email, err.response.data?.message)
         })
     }
     return (
@@ -54,7 +53,7 @@ const AddUser = (props: Props) => {
             <Toast ref={toast} />
             <Formik
                 validationSchema={validationSchema}
-                initialValues={initialValues}
+                initialValues={user ?? initialValues}
                 onSubmit={(values, actions) => onSubmit({ values, actions })}
                 enableReinitialize={true}
             >
@@ -88,7 +87,7 @@ const AddUser = (props: Props) => {
                             <div className='flex flex-col'>
                                 <label>Email</label>
                                 <InputText name="email" type="email" value={values.email ?? ""}
-                                    placeholder="Enter Last Name" autoComplete='new-email' className="p-inputtext-lg"
+                                    placeholder="Enter Email" autoComplete='new-email' className="p-inputtext-lg"
                                     onChange={(e) => setFieldValue('email', e.target.value)}
                                 />
                                 <span className='text-pink-300'>
@@ -96,7 +95,7 @@ const AddUser = (props: Props) => {
                                 </span>
                             </div>
 
-                            <div className='flex flex-col'>
+                            {!id ? <div className='flex flex-col'>
                                 <label>Password</label>
                                 <Password name="password" type="password" value={values.password ?? ""} toggleMask
                                     placeholder="Enter Password" autoComplete='new-password' inputClassName="p-inputtext-lg flex-1"
@@ -106,7 +105,7 @@ const AddUser = (props: Props) => {
                                 <span className='text-pink-300'>
                                     <ErrorMessage name='password' />
                                 </span>
-                            </div>
+                            </div> : null}
 
                             <div className='from-group'>
                                 <label>Payment Status</label>
@@ -122,10 +121,10 @@ const AddUser = (props: Props) => {
 
                             <div className='from-group'>
                                 <label>Payment Date</label>
-                                <Calendar value={values.paymentDate}
+                                <Calendar value={new Date(values.paymentDate)} dateFormat={'dd/mm/yy'}
                                     placeholder="Select..." className="w-full p-inputtext-lg " name="paymentDate"
                                     onChange={(e) => { setFieldValue('paymentDate', e.value); }}
-                                    minDate={new Date()}
+                                    minDate={new Date}
                                 />
                                 <span className='text-pink-300'>
                                     <ErrorMessage name='paymentDate' />
@@ -142,7 +141,7 @@ const AddUser = (props: Props) => {
                                 label="Save" icon=" pi pi-arrow-up-right " iconPos='right' />
                         </div>
 
-                        {true && (
+                        {false && (
                             <div className={'row mt-5'}>
                                 <div className={'col-12'}>
                                     <code>
