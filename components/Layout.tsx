@@ -17,7 +17,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div className={`${josefinSans.className} flex ${style.mainWrapper} ${active ? style.active : ""}`}>
             <Siderbar />
             <div className='content-wrapper flex-1 transition-all overflow-hidden'>
-                <header className='shadow-lg p-4  overflow-hidden sticky top-0 z-10 bg-inherit'>
+                <header className='shadow-lg p-4  sticky top-0 z-10 bg-inherit'>
                     <Navbar setActive={setActive} />
                 </header>
                 <main className='p-5 z-0 '>

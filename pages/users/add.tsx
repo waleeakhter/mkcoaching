@@ -96,7 +96,7 @@ const AddUser = ({ user, id }: Props) => {
                                 </span>
                             </div>
 
-                            {!id ? <div className='flex flex-col'>
+                            {!id ? <div className='flex flex-col overflow-hidden'>
                                 <label>Password</label>
                                 <Password name="password" type="password" value={values.password ?? ""} toggleMask
                                     placeholder="Enter Password" autoComplete='new-password' inputClassName="p-inputtext-lg flex-1"

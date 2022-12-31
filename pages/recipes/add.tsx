@@ -45,7 +45,7 @@ const AddRecipe = ({ recipe, id }: Props) => {
                                 </span>
                             </div>
 
-                            <div className='from-group'>
+                            <div className='from-group overflow-hidden'>
                                 <label>Make Time</label>
                                 <InputNumber value={values.makeTime}
                                     placeholder="Enter make time" className="w-full p-inputtext-lg " name="makeTime"
