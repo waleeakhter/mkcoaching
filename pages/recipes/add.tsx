@@ -5,10 +5,10 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button'; import { MultiSelect } from 'primereact/multiselect';
 import { Toast, ToastSeverityType } from 'primereact/toast';
 import { RecipeType } from '../../utils/Models/Recipe';
-import initialValues, { days, mealTime } from './Ts/add.values';
-import onSubmit from './Ts/add.functions';
+import initialValues, { days, mealTime } from '../../utils/Extra/Ts/add.values';
+import onSubmit from '../../utils/Extra/recipe/Ts/add.functions';
 import { InputNumber } from 'primereact/inputnumber';
-import validationSchema from './Ts/add.validation';
+import validationSchema from '../../utils/Extra/Ts/add.validation';
 
 
 type Props = { recipe: RecipeType, id: any }

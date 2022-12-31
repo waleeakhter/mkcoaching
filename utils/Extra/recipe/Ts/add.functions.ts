@@ -1,6 +1,6 @@
 import { FormikHelpers } from "formik";
-import API from "../../../utils/axios";
-import { RecipeType } from "../../../utils/Models/Recipe";
+import API from "../../../axios";
+import { RecipeType } from "../../../Models/Recipe";
 type functionProps = {
     values: RecipeType,
     actions: FormikHelpers<RecipeType>,
