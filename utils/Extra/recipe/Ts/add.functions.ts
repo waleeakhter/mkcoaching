@@ -12,6 +12,7 @@ const onSubmit = ({ values, actions, toastMessage, id }: functionProps) => {
         console.log(res.data);
         toastMessage('success', res.data?.recipe.name, res.data?.message)
         actions.setSubmitting(false)
+        actions.resetForm()
 
     }).catch(err => {
         console.log("erorrs", err)

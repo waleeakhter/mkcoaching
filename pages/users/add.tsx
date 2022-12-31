@@ -39,7 +39,8 @@ const AddUser = ({ user, id }: Props) => {
         API({ url: "/users/add", method: id ? 'PATCH' : 'POST', data: values }).then(res => {
             console.log(res.data);
             toastMessage('success', res.data?.user.firstName, res.data?.message)
-            actions.setSubmitting(false)
+            actions.setSubmitting(false);
+            !id && actions.resetForm()
 
         }).catch(err => {
             console.log("erorrs", err)

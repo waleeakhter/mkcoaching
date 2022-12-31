@@ -14,7 +14,7 @@ import validationSchema from '../../utils/Extra/recipe/Ts/add.validation';
 type Props = { recipe: RecipeType, id: any }
 const AddRecipe = ({ recipe, id }: Props) => {
     const toast = useRef<Toast>(null)
-    const [debug] = useState(true)
+    const [debug] = useState(false)
     const toastMessage = (severity: ToastSeverityType, summary: string, detail: string) => {
         toast.current ?
             toast.current.show({ severity: severity, summary: summary, detail: detail }) : null
