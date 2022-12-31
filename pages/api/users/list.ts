@@ -18,10 +18,9 @@ export default async function handler(
             break;
         case 'GET':
             console.log(query, "query")
-            UserModal.find({ ...query }, (err: Data, user: Object[]) => {
-                res.status(200).json(user)
-                res.end()
-            }).sort({ createdAt: -1 })
+            const usersList = await UserModal.find({ ...query }).sort({ createdAt: -1 })
+            res.status(200).json(usersList)
+            res.end()
             break;
         default:
             res.status(400).json({ message: "Somthing Went Wrong" });

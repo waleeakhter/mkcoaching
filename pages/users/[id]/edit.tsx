@@ -17,7 +17,7 @@ const EditUser = (props: Props) => {
     }, [id])
 
     return (
-        <AddUser id={id ?? ""} user={user} />
+        <AddUser id={id ?? ""} user={user ?? {}} />
     )
 }
 

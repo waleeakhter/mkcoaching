@@ -7,7 +7,7 @@ if (env == "development") {
 
 }
 else if (env == "production") {
-    url = 'https://jktrading.vercel.app/api/'
+    url = 'https://mkcoaching.vercel.app/api/'
 }
 const API = axios.create({
     baseURL: url,
