@@ -1,5 +1,5 @@
 
-import { RecipeType } from '../../Models/Recipe';
+import { RecipeType } from './../../../Models/Recipe';
 const initialValues: RecipeType = {
     name: "",
     makeTime: 0,
