@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from './../../../utils/conn'
-import UserModal from "./../../../utils/Models/User"
+import RecipeModal from "./../../../utils/Models/Recipe"
 type Data = {}
 export default async function handler(
     req: NextApiRequest,
@@ -14,7 +14,7 @@ export default async function handler(
             res.status(400).json({ message: "GET method not supported" });
             break;
         case 'POST':
-            UserModal.findOne({ email: req.body.email, }, (err: Data, user: {
+            RecipeModal.findOne({ name: req.body.name, }, (err: Data, recipe: {
                 email: string, save: Function
             }) => {
                 if (err) {
@@ -22,24 +22,24 @@ export default async function handler(
                     res.status(500).json({ message: "Something Went Wrong", errors: err })
                     return
                 }
-                if (user) {
-                    res.status(500).json({ message: "Email Already used", user: user })
+                if (recipe) {
+                    res.status(500).json({ message: "Recipe Already created", recipe: recipe })
                     return;
                 }
-                UserModal.create(req.body, (err: Data, newUser: Object) => {
+                RecipeModal.create(req.body, (err: Data, newRecipe: Object) => {
                     if (err) {
                         console.log(err, "err");
                         res.status(500).json({ message: "Something Went Wrong", errors: err })
                         return
                     }
-                    res.status(201).json({ message: "User Created Successfullu ", user: newUser })
+                    res.status(201).json({ message: "Recipe Created Successfullu ", recipe: newRecipe })
                 });
             })
             break;
 
         case 'PATCH':
-            const updateUser = await UserModal.findByIdAndUpdate({ _id: req.body._id }, req.body);
-            res.status(200).json({ message: "User updated successfully", user: updateUser })
+            const updateRecipe = await RecipeModal.findByIdAndUpdate({ _id: req.body._id }, req.body);
+            res.status(200).json({ message: "User updated successfully", recipe: updateRecipe })
 
             break;
         default:

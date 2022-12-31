@@ -14,3 +14,12 @@ button[type="submit"],
 button[type="button"] {
   background-color: var(--primary-color);
 }
+
+.p-float-label {
+  input:focus,
+  input.p-filled {
+    ~ label {
+      color: white !important;
+    }
+  }
+}

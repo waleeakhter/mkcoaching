@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from "next/legacy/image";
 import { Button } from 'primereact/button'
 import React, { MutableRefObject, useRef } from 'react'
 import { Menu } from 'primereact/menu';
@@ -15,9 +15,11 @@ const Navbar = ({ setActive }: Props) => {
         setActive((prev: boolean) => prev = !prev)
     }
     return (
-        <div className='flex justify-between'>
+        <div className='flex justify-between items-center'>
             <Button icon="pi pi-bars" onClick={toggleHandler} />
-            <Image src={'/logo.png'} alt={''} className={style.navLogo} fill loading='lazy' />
+            <div className="relative w-full max-w-[15rem] h-14 ">
+                <Image src={'/logo.png'} alt={'logo'} className={style.navLogo} loading='lazy' layout="fill" />
+            </div>
             <Menu model={items} popup ref={menu} id="popup_menu" />
             <Button label="Admin" icon="pi pi-user" onClick={(event) => menu.current.toggle(event)} aria-controls="popup_menu" />
         </div>
