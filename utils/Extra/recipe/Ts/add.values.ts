@@ -6,7 +6,10 @@ const initialValues: RecipeType = {
     days: [],
     mealTime: [],
     ingredients: [""],
-    Instructions: [{ protien: "", carbs: "", fats: "" }],
+    protien: "",
+    carbs: "",
+    fats: "",
+    Instructions: [""],
 }
 
 export default initialValues

@@ -1,15 +1,15 @@
 import { ErrorMessage, Formik, FormikHelpers } from 'formik'
 import React, { createRef, MutableRefObject, useRef } from 'react'
-import Layout from '../../components/Layout'
+import Layout from '../../../components/Admin/Layout'
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
 import * as yup from "yup";
-import API from "./../../utils/axios"
+import API from "./../../../utils/axios"
 import { Toast, ToastSeverityType } from 'primereact/toast';
-import { UserType } from '../../utils/Models/User';
+import { UserType } from '../../..//utils/Models/User';
 type Props = { user: UserType, id: any }
 const AddUser = ({ user, id }: Props) => {
     const toast = useRef<Toast>(null)

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import API from '../../../utils/axios'
-import { UserType } from '../../../utils/Models/User'
+import API from '../../../../utils/axios'
+import { UserType } from '../../../../utils/Models/User'
 import AddUser from '../add'
 
 type Props = {}

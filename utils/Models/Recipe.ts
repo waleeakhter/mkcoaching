@@ -5,7 +5,10 @@ export type RecipeType = {
     days: Array<"">,
     mealTime: Object[],
     ingredients: Array<"">,
-    Instructions: Array<{ protien: string, carbs: string, fats: string }>,
+    protien: string,
+    carbs: string,
+    fats: string,
+    Instructions: Array<"">,
 }
 
 const recipeSchema = new mongoose.Schema({
@@ -29,13 +32,28 @@ const recipeSchema = new mongoose.Schema({
         required: true,
         index: true
     },
+    protien: {
+        type: String,
+        required: true,
+        index: true
+    },
+    carbs: {
+        type: String,
+        required: true,
+        index: true
+    },
+    fats: {
+        type: String,
+        required: true,
+        index: true
+    },
     ingredients: {
         type: [String],
         required: true,
         index: true
     },
     Instructions: {
-        type: Array,
+        type: [String],
         required: true,
         index: true
     },

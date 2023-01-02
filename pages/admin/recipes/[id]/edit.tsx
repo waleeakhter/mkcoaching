@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import API from '../../../utils/axios'
-import { RecipeType } from '../../../utils/Models/Recipe'
+import API from '../../../../utils/axios'
+import { RecipeType } from '../../../../utils/Models/Recipe'
 import AddRecipe from '../add'
 
 type Props = {}

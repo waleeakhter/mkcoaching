@@ -1,20 +1,20 @@
 import { ErrorMessage, FieldArray, Formik, FormikHelpers } from 'formik'
 import React, { useRef, useState } from 'react'
-import Layout from '../../components/Layout'
+import Layout from '../../../components/Admin/Layout'
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button'; import { MultiSelect } from 'primereact/multiselect';
 import { Toast, ToastSeverityType } from 'primereact/toast';
-import { RecipeType } from '../../utils/Models/Recipe';
-import initialValues, { days, mealTime } from '../../utils/Extra/recipe/Ts/add.values';
-import onSubmit from '../../utils/Extra/recipe/Ts/add.functions';
+import { RecipeType } from '../../../utils/Models/Recipe';
+import initialValues, { days, mealTime } from '../../../utils/Extra/recipe/Ts/add.values';
+import onSubmit from '../../../utils/Extra/recipe/Ts/add.functions';
 import { InputNumber } from 'primereact/inputnumber';
-import validationSchema from '../../utils/Extra/recipe/Ts/add.validation';
+import validationSchema from '../../../utils/Extra/recipe/Ts/add.validation';
 
 
 type Props = { recipe: RecipeType, id: any }
 const AddRecipe = ({ recipe, id }: Props) => {
     const toast = useRef<Toast>(null)
-    const [debug] = useState(false)
+    const [debug] = useState(true)
     const toastMessage = (severity: ToastSeverityType, summary: string, detail: string) => {
         toast.current ?
             toast.current.show({ severity: severity, summary: summary, detail: detail }) : null
@@ -78,6 +78,36 @@ const AddRecipe = ({ recipe, id }: Props) => {
                                     <ErrorMessage name='mealTime' />
                                 </span>
                             </div>
+
+                            <div className='flex flex-col'>
+                                <label className='block' htmlFor={`protien`}>Portien</label>
+
+                                <InputText autoComplete='off' value={values.protien} placeholder="Enter Portien Value"
+                                    name={`protien`} className={' p-inputtext-lg '}
+                                    onChange={(e) => setFieldValue(`protien`, e.target.value)} />
+
+                                <span className='text-pink-300 block'>
+                                    <ErrorMessage name={`protien`} />
+                                </span>
+                            </div>
+
+                            <div className='flex flex-col'>
+                                <label className='block'>Carbs</label>
+                                <InputText autoComplete='off' name={`carbs`} value={values.carbs} placeholder='Enter Carbs Value'
+                                    className={' p-inputtext-lg '} onChange={(e) => setFieldValue(`carbs`, e.target.value)} />
+                                <span className='text-pink-300 block'>
+                                    <ErrorMessage name={`carbs`} />
+                                </span>
+                            </div>
+
+                            <div className='flex flex-col'>
+                                <label className='block'>Fats</label>
+                                <InputText autoComplete='off' name={`fats`} value={values.fats} placeholder="Enter Fats Value"
+                                    className={' p-inputtext-lg '} onChange={(e) => setFieldValue(`fats`, e.target.value)} />
+                                <span className='text-pink-300 block'>
+                                    <ErrorMessage name={`fats`} />
+                                </span>
+                            </div>
                         </div>
 
 
@@ -90,38 +120,16 @@ const AddRecipe = ({ recipe, id }: Props) => {
                                         {(
                                             values.Instructions?.map((ins, index) => (
                                                 <div key={index} className="flex mb-7 gap-4">
-                                                    <div className='flex flex-wrap items-baseline gap-y-7'>
-                                                        <div>
-                                                            <div className='p-float-label'>
-                                                                <InputText autoComplete='off' id={`Instructions.${index}.protien`} value={values.Instructions[index].protien}
-                                                                    name={`Instructions.${index}.protien`} className={' p-inputtext-lg '}
-                                                                    onChange={(e) => setFieldValue(`Instructions.${index}.protien`, e.target.value)} />
-                                                                <label className='block' htmlFor={`Instructions.${index}.protien`}>Portien</label>
-                                                            </div>
-                                                            <span className='text-pink-300 block'>
-                                                                <ErrorMessage name={`Instructions.${index}.protien`} />
-                                                            </span>
+                                                    <div className='flex flex-wrap flex-col items-baseline gap-y-4'>
+                                                        <div className='p-float-label'>
+                                                            <InputText id={`Instructions.${index}`} value={ins ?? ""}
+                                                                name={`Instructions.${index}`} className={' p-inputtext-lg '}
+                                                                onChange={(e) => setFieldValue(`Instructions.${index}`, e.target.value)} />
+                                                            <label className='block' htmlFor={`Instructions.${index}`}>Instruction {index + 1}</label>
                                                         </div>
-                                                        <div>
-                                                            <div className='p-float-label'>
-                                                                <InputText autoComplete='off' name={`Instructions.${index}.carbs`} value={values.Instructions[index].carbs}
-                                                                    className={' p-inputtext-lg '} onChange={(e) => setFieldValue(`Instructions.${index}.carbs`, e.target.value)} />
-                                                                <label className='block'>Carbs</label>
-                                                            </div>
-                                                            <span className='text-pink-300 block'>
-                                                                <ErrorMessage name={`Instructions.${index}.carbs`} />
-                                                            </span>
-                                                        </div>
-                                                        <div>
-                                                            <div className='p-float-label'>
-                                                                <InputText autoComplete='off' name={`Instructions.${index}.fats`} value={values.Instructions[index].fats}
-                                                                    className={' p-inputtext-lg '} onChange={(e) => setFieldValue(`Instructions.${index}.fats`, e.target.value)} />
-                                                                <label className='block'>Fats</label>
-                                                            </div>
-                                                            <span className='text-pink-300 block'>
-                                                                <ErrorMessage name={`Instructions.${index}.fats`} />
-                                                            </span>
-                                                        </div>
+                                                        <span className='text-pink-300 block'>
+                                                            <ErrorMessage name={`Instructions.${index}`} />
+                                                        </span>
                                                     </div>
 
                                                     <div className='p-buttonset'>
@@ -134,7 +142,7 @@ const AddRecipe = ({ recipe, id }: Props) => {
                                                             className='w-20'
                                                             type="button"
                                                             icon="pi pi-plus"
-                                                            onClick={() => arrayHelpers.insert(index, { protien: "", carbs: "", fats: "" })}
+                                                            onClick={() => arrayHelpers.insert(index, "")}
                                                         />}
                                                     </div>
                                                 </div>

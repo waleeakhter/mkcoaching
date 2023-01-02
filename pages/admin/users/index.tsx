@@ -1,8 +1,8 @@
 import React from 'react'
-import Datatable from '../../components/Datatable/Datatable'
-import Layout from '../../components/Layout'
-import API from '../../utils/axios'
-import { UserType } from '../../utils/Models/User'
+import Datatable from '../../../components/Admin/Datatable/Datatable'
+import Layout from '../../../components/Admin/Layout'
+import API from '../../../utils/axios'
+import { UserType } from '../../../utils/Models/User'
 
 type Props = { users: Object[] }
 

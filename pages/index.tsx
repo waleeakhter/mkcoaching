@@ -1,19 +1,11 @@
-import Head from 'next/head'
-import { Inter } from '@next/font/google'
-import Layout from '../components/Layout'
+import React from 'react'
 
-const inter = Inter({ subsets: ['latin'] })
+type Props = {}
 
-export default function Home() {
+const Home = (props: Props) => {
   return (
-    <>
-      <Head>
-        <title>Dashboard</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <Layout>
-
-      </Layout>
-    </>
+    <div>Home</div>
   )
 }
+
+export default Home

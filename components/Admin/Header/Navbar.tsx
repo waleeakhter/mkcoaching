@@ -3,13 +3,14 @@ import { Button } from 'primereact/button'
 import React, { MutableRefObject, useRef } from 'react'
 import { Menu } from 'primereact/menu';
 import style from "./mkheader.module.scss"
+import { signOut } from 'next-auth/react'
 type Props = { setActive: Function }
 
 const Navbar = ({ setActive }: Props) => {
     const menu: any = useRef(null);
     let items = [
         { label: 'Settings', icon: 'pi pi-fw pi-plus' },
-        { label: 'Logout', icon: 'pi pi-fw pi-trash' }
+        { label: 'Logout', icon: 'pi pi-fw pi-trash', command: () => signOut() }
     ];
     const toggleHandler = () => {
         setActive((prev: boolean) => prev = !prev)

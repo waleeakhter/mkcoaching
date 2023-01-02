@@ -1,6 +1,6 @@
 import React from 'react'
-import Layout from '../../components/Layout'
-import API from '../../utils/axios'
+import Layout from '../../../components/Admin/Layout'
+import API from '../../../utils/axios'
 import { Card } from 'primereact/card';
 type Props = { users: Object[] }
 

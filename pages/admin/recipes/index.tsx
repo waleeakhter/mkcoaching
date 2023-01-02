@@ -1,8 +1,8 @@
 import React from 'react'
-import Datatable from '../../components/Datatable/Datatable'
-import Layout from '../../components/Layout'
-import API from '../../utils/axios'
-import { RecipeType } from '../../utils/Models/Recipe'
+import Datatable from '../../../components/Admin/Datatable/Datatable'
+import Layout from '../../../components/Admin/Layout'
+import API from '../../../utils/axios'
+import { RecipeType } from '../../../utils/Models/Recipe'
 
 type Props = { users: Object[] }
 
@@ -16,12 +16,19 @@ const RecipesList = (props: Props) => {
         },
         {
             body: (rowData: RecipeType) => <ul className='flex flex-col max-h-20 w-full capitalize overflow-y-auto gap-1 text-xl'>
-                {rowData.ingredients.map(ing => <li className='text-sm' key={ing}>{ing}</li>)}</ul>, header: 'Ingredients',
+                <li className='text-sm'>Protiens: {rowData.protien}</li>
+                <li className='text-sm'>Carbs: {rowData.carbs}</li>
+                <li className='text-sm'>Fats: {rowData.fats}</li>
+            </ul>, header: 'Micronutrients',
         },
         {
             body: (rowData: RecipeType) => <ul className='flex flex-col max-h-20 w-full capitalize overflow-y-auto gap-1 text-xl'>
-                {rowData.Instructions.map(ins => <li className='text-sm' key={ins.protien}>P: {ins.protien}, C: {ins.carbs}, F: {ins.fats}</li>)}
-            </ul>, header: 'Instructions',
+                {rowData.ingredients.map((ing, index) => <li className='text-sm' key={ing}>{index + 1}. {ing}</li>)}</ul>, header: 'Ingredients',
+        },
+        {
+            body: (rowData: RecipeType) => <ol className=' list-decimal max-h-20 w-full capitalize overflow-y-auto text-xl'>
+                {rowData.Instructions.map((ins, index) => <li className='text-sm ' key={ins}>{index + 1}. {ins}</li>)}
+            </ol>, header: 'Instructions',
         },
     ]
     return (
