@@ -1,5 +1,5 @@
 import router from "next/router";
-import API from "../../utils/axios";
+import API from "../../../utils/axios";
 
 // disable btn function
 export const disabledBtns = (_btn: HTMLButtonElement, check: boolean) => {
