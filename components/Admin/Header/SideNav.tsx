@@ -8,17 +8,17 @@ const SideNav = (props: Props) => {
         {
             name: "Dashboard",
             icon: "pi pi-box",
-            link: "/dashboard"
+            link: "/admin/dashboard"
         },
         {
             name: "Users",
             icon: "pi pi-user",
-            link: "/users"
+            link: "/admin/users"
         },
         {
             name: "Recipes",
             icon: "pi pi-apple",
-            link: "/recipes"
+            link: "/admin/recipes"
         }
 
     ]

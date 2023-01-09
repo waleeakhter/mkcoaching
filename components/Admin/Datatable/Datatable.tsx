@@ -72,7 +72,7 @@ const Datatable = (props: Props & actionButtons) => {
             <div className="flex flex-wrap gap-4 justify-between items-center">
                 <div className='flex  gap-3 items-center '>
                     <h5 className="m-0 text-2xl text-white">{props.tableName}</h5>
-                    {!props.hideAddBtn && <Link href={`/${props.targetRoute}/add`} >
+                    {!props.hideAddBtn && <Link href={`/admin/${props.targetRoute}/add`} >
                         <Button label='' icon="pi pi-plus" />
                     </Link>}
                 </div>
