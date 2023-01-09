@@ -13,7 +13,7 @@ const ActionButtons = ({ rowData, prevProps }: Props) => {
         <>
             <div className='flex justify-center text-center w-full'>
                 <span className="p-buttonset">
-                    {!prevProps.hideEditBtn && <Link href={`/${prevProps.targetRoute}/${rowData._id}/edit`}  >
+                    {!prevProps.hideEditBtn && <Link href={`/admin/${prevProps.targetRoute}/${rowData._id}/edit`}  >
                         < Button icon="pi pi-file-edit" tooltip='Edit Product' tooltipOptions={{ position: 'bottom' }} />
                     </Link>}
                     {!prevProps.hideDeleteBtn && <Button icon="pi pi-trash" tooltip='Delete Product' className='btn-delete' tooltipOptions={{ position: 'bottom' }} />}
