@@ -1,61 +1,35 @@
-import { ErrorMessage, Formik, FormikHelpers } from 'formik'
-import React, { createRef, MutableRefObject, useRef } from 'react'
+import { ErrorMessage, Formik } from 'formik'
+import React, { useRef } from 'react'
 import Layout from '../../../components/Admin/Layout'
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { Button } from 'primereact/button';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
-import * as yup from "yup";
-import API from "./../../../utils/axios"
 import { Toast, ToastSeverityType } from 'primereact/toast';
 import { UserType } from '../../..//utils/Models/User';
+import onSubmit from '../../../utils/Extra/user/add.functions';
+import validationSchema from '../../../utils/Extra/user/add.validation';
+import initialValues from '../../../utils/Extra/user/add.values';
+
 type Props = { user: UserType, id: any }
+
 const AddUser = ({ user, id }: Props) => {
     const toast = useRef<Toast>(null)
-    const initialValues: UserType = {
-        firstName: "",
-        lastName: "",
-        email: '',
-        password: '',
-        paymentStatus: '',
-        paymentDate: ''
-    }
-    const validationSchema = yup.object().shape({
-        firstName: yup.string().required("Field is required!"),
-        lastName: yup.string().required("Field is required!"),
-        email: yup.string().email("Email is not valid").required("Email field is required"),
-        password: !id ? yup.string().required("Password field is required") : yup.string(),
-        paymentStatus: yup.string().required("Field is required!"),
-        paymentDate: yup.string().required("Field is required!")
-    })
 
     const toastMessage = (severity: ToastSeverityType, summary: string, detail: string) => {
         toast.current ?
             toast.current.show({ severity: severity, summary: summary, detail: detail }) : null
 
     }
-    const onSubmit = ({ values, actions }: { values: UserType, actions: FormikHelpers<UserType> }) => {
-        API({ url: "/users/add", method: id ? 'PATCH' : 'POST', data: values }).then(res => {
-            console.log(res.data);
-            toastMessage('success', res.data?.user.firstName, res.data?.message)
-            actions.setSubmitting(false);
-            !id && actions.resetForm()
 
-        }).catch(err => {
-            console.log("erorrs", err)
-            actions.setSubmitting(false)
-            toastMessage('error', "Error", "Somthing Went Wrong")
-            toastMessage('error', err.response?.data?.user.email, err.response.data?.message)
-        })
-    }
     return (
         <Layout>
             <Toast ref={toast} />
             <Formik
-                validationSchema={validationSchema}
+                validationSchema={validationSchema(id)}
                 initialValues={user ?? initialValues}
-                onSubmit={(values, actions) => onSubmit({ values, actions })}
+                onSubmit={(values, actions) => onSubmit({ values, actions, id, toastMessage })}
                 enableReinitialize={true}
             >
                 {({ values, errors, touched, setFieldValue, handleSubmit, isSubmitting }) => (

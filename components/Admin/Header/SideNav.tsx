@@ -19,6 +19,11 @@ const SideNav = (props: Props) => {
             name: "Recipes",
             icon: "pi pi-apple",
             link: "/admin/recipes"
+        },
+        {
+            name: "Posts",
+            icon: "pi pi-camera",
+            link: "/admin/posts"
         }
 
     ]
