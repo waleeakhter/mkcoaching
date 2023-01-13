@@ -1,5 +1,5 @@
 import * as yup from "yup";
-const isValidUrl = (url) => {
+const isValidUrl = (url: string) => {
     try {
         new URL(url);
     } catch (e) {
@@ -12,7 +12,7 @@ const validationSchema = (id: string) => {
         title: yup.string().required("Field is required!"),
         description: yup.string().required("Field is required!"),
         category: yup.string().required("Field is required!"),
-        url: yup.string().test('is-url-valid', 'URL is not valid', (value) => isValidUrl(value)).required()
+        url: yup.string().test('is-url-valid', 'URL is not valid', (value) => isValidUrl(value as string)).required()
     })
 }
 
