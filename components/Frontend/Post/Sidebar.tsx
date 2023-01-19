@@ -11,7 +11,7 @@ const VideoSideBar = ({ posts }: PostProps) => {
         <Card className=' bg-slate-50/20 max-w-xs w-full '>
             <Accordion activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
                 {posts.map(post =>
-                    <AccordionTab header={post.category.name}>
+                    <AccordionTab header={post.category.name} key={post.title}>
                         <span className=' cursor-pointer '>{post.title}</span>
                     </AccordionTab>
                 )}

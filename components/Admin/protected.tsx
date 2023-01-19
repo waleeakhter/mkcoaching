@@ -15,7 +15,7 @@ const Protected = ({ children }: PropsWithChildren): JSX.Element => {
     useEffect(() => {
         console.log(status)
         status === "unauthenticated" ? redirect() : null;
-    }, [status])
+    }, [status, redirect])
 
     {
         if (status === "authenticated") {
